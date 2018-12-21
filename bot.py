@@ -6,6 +6,31 @@ import telebot
 # import ...
 
 # Example of your code beginning
+bot = telebot.TeleBot('653745692:AAGZgPfeePUrQTd6-MrRwQRLo9jL0WtTmBs', threaded=False)
+
+
+def default_test(message):
+    markup = types.InlineKeyboardMarkup()
+    btn_my_site1 = types.InlineKeyboardButton(text='перевірити вказану особу по Миротворцю', url='https://myrotvorets.center/criminal/?cf[name]='+ message.text )
+    markup.row(btn_my_site1)
+    bot.send_message(message.chat.id, message.text, reply_markup=markup)
+
+
+
+
+
+
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
+        default_test(message)
+
+
+
+while True:
+    try:
+        bot.infinity_polling(True)
+    except Exception as err:
+        print("eroor")
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
 some_api_token = os.environ['SOME_API_TOKEN']
